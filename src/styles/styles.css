@@ -1,0 +1,93 @@
+@font-face {
+  font-family: 'Always Together';
+  src: url('./Always Together.otf') format('opentype');
+}
+
+body {
+  margin: 0;
+  font-family: 'Always Together';
+  font-weight: normal;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(-100%);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.toggle-button, .close-button {
+  position: absolute;
+  top: 10px;
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-family: 'Always Together', cursive;
+}
+
+.toggle-button {
+  left: 10px;
+}
+
+.close-button {
+  right: 10px;
+}
+
+.toggle-button:hover, .close-button:hover {
+  background-color: #666;
+}
+
+/* General styling for dropdown container */
+#dropdown-container {
+  margin-top: 20px;
+  padding: 10px;
+  overflow-y: auto; /* Allow scrolling if content exceeds the sidebar height */
+}
+
+/* Each group of label and dropdowns */
+.dropdown-group {
+  margin-bottom: 20px;
+}
+
+/* Style the label */
+.dropdown-group label {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 15pt;
+}
+
+/* Style for dropdowns */
+.dropdown-group select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  background-color: #444;
+  color: white;
+}
+
+/* Hide scrollbars */
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Edge */
+}
+
+/* Handle overflow for large content inside the dropdown container */
+.dropdown-container {
+  max-height: calc(100% - 50px); /* Adjust for spacing */
+  overflow-y: auto;
+}
