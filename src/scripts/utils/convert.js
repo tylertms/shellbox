@@ -19,7 +19,7 @@ function startsWith(buffer, magic, length) {
  * @param {string} name - The name for the GLTF mesh.
  * @returns {Uint8Array|null} - The resulting GLB binary data or null on error.
  */
-export function convertBuffer(rpoData, name) {
+function convertBuffer(rpoData, name) {
   let bin;
 
   if (startsWith(rpoData, RPO1_MAGIC, 4)) {
@@ -230,3 +230,6 @@ export function convertBuffer(rpoData, name) {
 
   return glbBuffer;
 }
+
+
+export default convertBuffer;

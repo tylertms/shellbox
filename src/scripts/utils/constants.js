@@ -244,3 +244,9 @@ export const dependentBuildings = {
   'DEPOT': 'MISSION_CONTROL',
   'MISSION_CONTROL': 'FUEL_TANK'
 }
+
+export const URLs = {
+  shells: 'https://gist.githubusercontent.com/tylertms/7592bcbdd1b6891bdf9b2d1a4216b55b/raw',
+  worker: 'https://shell.tylertms.workers.dev/?url=https://auxbrain.com/dlc/shells/',
+  r2: 'https://pub-09894c58859248c6ba3cd24f4045b4b5.r2.dev/',
+};

@@ -1,36 +1,4 @@
-import { populateShellData, loadShells } from './fetch.js';
-import { defaults, fileMap, categoryMap } from './defaults.js';
-
-const sidebar = document.getElementById('sidebar');
-
-function toggleSidebar() {
-  sidebar.classList.toggle('open');
-}
-
-export async function handleDropdownChange(event) {
-  const states = getAllDropdownStates();
-  await loadShells(states);
-}
-
-document.addEventListener('DOMContentLoaded', async () => {
-  const toggleButton = document.querySelector('.toggle-button');
-  const closeButton = document.querySelector('.close-button');
-
-  toggleButton.addEventListener('click', toggleSidebar);
-  closeButton.addEventListener('click', toggleSidebar);
-
-  await populateShellData();
-
-  const shells = defaults.max.map(building => {
-    return { set: 'Default', building: building, name: fileMap[building], category: categoryMap[building] };
-  });
-
-  setDropdownStates(shells);
-  await loadShells(shells);
-});
-
-
-function getAllDropdownStates() {
+function getMenuStates() {
   // Get all dropdown menus
   const dropdownGroups = document.querySelectorAll('.dropdown-group');
   const states = [];
@@ -65,7 +33,7 @@ function getAllDropdownStates() {
   return states;
 }
 
-function setDropdownStates(shells) {
+function setMenuStates(shells) {
   const dropdownGroups = document.querySelectorAll('.dropdown-group');
   dropdownGroups.forEach(group => {
     const categoryName = group.querySelector('label').value;
@@ -81,3 +49,5 @@ function setDropdownStates(shells) {
     }
   });
 }
+
+export { getMenuStates, setMenuStates };
