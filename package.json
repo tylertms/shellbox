@@ -2,13 +2,12 @@
   "type": "module",
   "dependencies": {
     "pako": "^2.1.0",
-    "three": "^0.170.0"
+    "three": "^0.171.0"
   },
   "devDependencies": {
-    "vite": "^6.0.1"
+    "vite": "^6.0.2"
   },
   "scripts": {
     "deploy": "sudo ntl build && sudo ntl deploy --prod"
-}
-
+  }
 }

@@ -1,25 +1,21 @@
-import dropdownChange from "../events/dropdown";
 import { getConfig } from "../utils/config";
+import { orderedBuildings, categoryMap } from "../utils/constants";
 
-const panelContent = document.querySelector('.panel-content');
-const dropdown = document.createElement('select');
+const setContent = document.getElementById('sets');
+const buildingContent = document.querySelector('.buildings');
+const dropdown = document.getElementById('set-select')
 
 async function populateShellData() {
   try {
-    const header = document.createElement('h2');
-    header.textContent = "SETS";
-    panelContent.appendChild(header);
-
     const config = getConfig();
     config.shellSets.filter(s => !s.elementSet).sort((a, b) => a.name.localeCompare(b.name)).forEach(set => {
-      console.log(set)
       const option = document.createElement('option');
       option.value = set.identifier;
       option.textContent = set.name;
       dropdown.appendChild(option);
     });
     
-    panelContent.appendChild(dropdown);
+    setContent.appendChild(dropdown);
 
     dropdown.addEventListener('change', dropdownChange);
 

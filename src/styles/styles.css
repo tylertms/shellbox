@@ -9,17 +9,16 @@ body {
 }
 
 * {
-    font-family: 'Always Together'; /* Apply the font to all elements */
-    font-size: 16px; /* Adjusted font size for better readability */
+    font-family: 'Always Together';
+    font-size: 16px;
 }
 
 ::-webkit-scrollbar {
     display: none;
 }
 
-/*--------Side-Panel-------------------*/
 .panel-content {
-  color: white;
+    color: white;
     position: fixed;
     padding-top: 60px;
     padding-left: 20px;
@@ -30,7 +29,7 @@ body {
     z-index: 1;
     background-color: rgba(51, 51, 51, 0.8);
     backdrop-filter: blur(25px);
-    transition: left 0.2s ease-in-out; /* Smooth slide-in/out */
+    transition: left 0.2s ease-in-out;
 }
 
 .panel-content.open {
@@ -52,12 +51,22 @@ body {
     transition: left 0.2s ease-in-out;
 }
 
-.panel-content.open ~ .toggle-button {
-  left: 260px;
+h2#title {
+    position: fixed;
+    top: 0px;
+    left: 22px;
+    color: white;
+    z-index: 10;
+    font-size: 28px;
+}
+
+.panel-content.open~.toggle-button {
+    left: 255px;
 }
 
 .toggle-button:hover {
-    background-color: #555;
+    background-color: #222;
+    
 }
 
 .performance-mode-toggle {
@@ -84,4 +93,86 @@ body {
     width: 20px;
     height: 20px;
     cursor: pointer;
+}
+
+select {
+    width: 210px;
+    height: 35px;
+    padding: 7px;
+    padding-left: 10px;
+    padding-bottom: 4px;
+    padding-right: 40px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border-radius: 10px;
+}
+
+.apply {
+    color: white;
+    background-color: #333;
+    height: 35px;
+    float: right;
+    border-radius: 10px;
+}
+
+hr#header-break {
+    float: left;
+    width: 280px;
+}
+
+.collapsible {
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    padding-bottom: 6px;
+    margin-top: 10px;
+    width: calc(100% - 20px);
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.active,
+.collapsible:hover {
+    background-color: #222;
+}
+
+.active {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.content {
+    padding: 10px;
+    display: none;
+    overflow: hidden;
+    background-color: rgba(34, 34, 34, 0.5);
+    margin-bottom: 10px;
+    width: calc(100% - 40px);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.collapsible:after {
+    content: '▼';
+    font-size: 13px;
+    color: white;
+    float: right;
+}
+
+.active:after {
+    content: "▲";
+    border-radius: 0;
+}
+
+.content#sets {
+    display: flex;
+    justify-content: space-between;
 }

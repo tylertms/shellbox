@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Shell Sandbox</title>
+    <title>Shellbox</title>
     <link rel="stylesheet" href="./styles/styles.css">
 </head>
 
@@ -11,6 +11,18 @@
     <!-- Side Panel -->
     <div class="side-panel">
         <div class="panel-content">
+            <h2 id="title">Shellbox</h2>
+            <hr id="header-break">
+            <button type="button" class="collapsible">Sets</button>
+            <div id="set-content" class="content">
+                <select id="set-select"></select>
+                <button class="apply" type="button">Apply</button>
+            </div>
+
+            <button type="button" class="collapsible">Buildings</button>
+            <div id="building-content" class="content">
+            </div>
+
             <div class="performance-mode-toggle">
                 <label for="performance-mode">Low Performance</label>
                 <input type="checkbox" id="performance-mode" name="performance-mode">

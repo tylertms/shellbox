@@ -3,7 +3,7 @@
 import { initConfig } from './utils/config.js';
 import populateShellData from './menu/populate.js';
 import renderShells from './render/render.js';
-import { setupPanelToggle, setupLowPerformance } from './menu/panel.js'; // Import panel toggle
+import { setupPanelToggle, setupLowPerformance, setupCollapsible, setupApplyButtons } from './menu/panel.js'; // Import panel toggle
 import { defaults, fileMap, categoryMap } from './utils/constants.js';
 
 // Function to initialize the application
@@ -15,6 +15,8 @@ async function initializeApp() {
 
     setupPanelToggle();
     setupLowPerformance();
+    setupCollapsible();
+    setupApplyButtons();
 
     await populateShellData();
 
@@ -25,6 +27,8 @@ async function initializeApp() {
       name: fileMap[building],
       category: categoryMap[building]
     }));
+
+
     
     await renderShells(shells);
 

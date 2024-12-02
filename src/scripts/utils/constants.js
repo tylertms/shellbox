@@ -221,7 +221,33 @@ export const defaults = {
   ]
 }
 
-export const available = defaults.max.map(building => categoryMap[building]);
+export const orderedBuildings = [
+  'GROUND',
+  'HARDSCAPE',
+  'MAILBOX',
+  'TROPHY_CASE',
+  'SHIPPING_DEPOT',
+  'HATCHERY',
+  'LAB',
+  'HOA',
+  'MISSION_CONTROL',
+  'FUEL_TANK',
+  'HYPERLOOP',
+  'HAB',
+  'HAB',
+  'HAB',
+  'HAB',
+  'SILO',
+  'SILO',
+  'SILO',
+  'SILO',
+  'SILO',
+  'SILO',
+  'SILO',
+  'SILO',
+  'SILO',
+  'SILO',
+]
 
 export const displayNames = {
   'HAB': 'Habs',
@@ -238,6 +264,7 @@ export const displayNames = {
   'TROPHY_CASE': 'Trophy Case',
   'SILO': 'Silo'
 }
+
 
 
 export const dependentBuildings = {
