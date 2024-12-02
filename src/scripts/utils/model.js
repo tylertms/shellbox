@@ -14,11 +14,7 @@ const getSize = (model) => {
 
 const applyProperties = (model, shell) => {
   model.userData = {
-    building: shell.building,
-    set: shell.set,
-    category: shell.category || categoryMap[shell.building],
-    name: shell.name,
-    id: shell.id
+    shell
   };
 
   const { positions, rotations } = adjustPositions(shell, model);
@@ -36,10 +32,14 @@ const applyProperties = (model, shell) => {
   });
 };
 
+const getBuilding = (shell) => {
+  if (!shell) return;
+  return shell.primaryPiece?.assetType || shell.building;
+};
 
+const adjustPositions = (shell, model) => {
+  const building = shell.primaryPiece?.assetType || shell.building;
 
-const adjustPositions = (shell, model, index = 0) => {
-  const { building } = shell;
   let positions = { x: 0, y: 0, z: 0 };
   let rotations = { x: 0, y: 0, z: 0 };
 
@@ -65,7 +65,7 @@ const adjustPositions = (shell, model, index = 0) => {
   } else if (building.startsWith('HATCHERY_UNIVERSE_')) {
     positions = { x: 10, y: 2, z: 3 };
   } else if (building.startsWith('SILO')) {
-    const silos = scene.children.filter((child) => child.userData.building?.startsWith('SILO'));
+    const silos = scene.children.filter((child) => getBuilding(child.userData.shell)?.startsWith('SILO'));
 
     positions = {
       x: -6 * (silos.length % 5) - 5,
@@ -73,7 +73,7 @@ const adjustPositions = (shell, model, index = 0) => {
       z: -6 * (silos.length % 2) + 5.5,
     };
   } else if (building.startsWith('HOA')) {
-    const lab = scene.children.find((child) => child.userData.building?.startsWith('LAB'));
+    const lab = scene.children.find((child) => getBuilding(child.userData.shell)?.startsWith('LAB'));
     positions = {
       x: lab ? getSize(lab).x + 5 : 0,
       y: 0,
@@ -81,17 +81,17 @@ const adjustPositions = (shell, model, index = 0) => {
     };
   } else if (building.startsWith('MISSION_CONTROL')) {
     const hatchery = scene.children.find((child) =>
-      child.userData.building?.startsWith('HATCHERY')
+      getBuilding(child.userData.shell)?.startsWith('HATCHERY')
     );
     const depot = scene.children.find((child) =>
-      child.userData.building?.startsWith('DEPOT')
+      getBuilding(child.userData.shell)?.startsWith('DEPOT')
     );
 
     const max = Math.max(hatchery ? getSize(hatchery).x : 0, depot ? getSize(depot).x : 0);
     positions = { x: max + 11, y: 0, z: 6 };
   } else if (building.startsWith('FUEL_TANK')) {
     const missionControl = scene.children.find((child) =>
-      child.userData.building?.startsWith('MISSION_CONTROL')
+      getBuilding(child.userData.shell)?.startsWith('MISSION_CONTROL')
     );
     positions = {
       x: missionControl ? missionControl.position.x + getSize(missionControl).x / 2 + 3 : 0,
@@ -104,8 +104,9 @@ const adjustPositions = (shell, model, index = 0) => {
 
   if (categoryMap[building] === 'HAB') {
     const allHabs = scene.children.filter((child) => {
-      if (!child.userData || !child.userData.building) return false;
-      return categoryMap[child.userData.building] === 'HAB';
+      let building = getBuilding(child.userData.shell);
+      if (!building) return false;
+      return categoryMap[building] === 'HAB';
     });
 
     const totalX = allHabs.reduce(
@@ -118,15 +119,18 @@ const adjustPositions = (shell, model, index = 0) => {
   return { positions, rotations };
 };
 
-const handleDependencies = (shellOrBuilding) => {
+const handleDependencies = (s) => {
+  const building = s.primaryPiece?.assetType || s.building;
+  
   Object.keys(dependentBuildings).forEach((key) => {
-    if (shellOrBuilding.startsWith(key)) {
-      const dependentModel = scene.children.find((child) =>
-        child.userData.building?.startsWith(dependentBuildings[key])
-      );
+    if (building.startsWith(key)) {
+      const dependentModel = scene.children.find((child) => {
+        const childBuilding = child.userData.shell?.primaryPiece?.assetType || child.userData.shell?.building;
+        if (!childBuilding) return false;
+        return childBuilding.startsWith(dependentBuildings[key])
+      });
       if (dependentModel) {
-        const dependentShell = { building: dependentModel.userData.building };
-        const { positions } = adjustPositions(dependentShell);
+        const { positions } = adjustPositions(dependentModel.userData.shell, dependentModel);
         if (positions) {
           dependentModel.position.set(positions.x, positions.y, positions.z);
         }

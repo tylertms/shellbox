@@ -2,27 +2,25 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<title>Shell Sandbox</title>
-	<link rel="stylesheet" href="./styles/styles.css">
+    <meta charset="utf-8">
+    <title>Shell Sandbox</title>
+    <link rel="stylesheet" href="./styles/styles.css">
 </head>
 
 <body>
-	<!-- Toggle Button -->
-	<button class="toggle-button">☰ Menu</button>
+    <!-- Side Panel -->
+    <div class="side-panel">
+        <div class="panel-content">
+            <div class="performance-mode-toggle">
+                <label for="performance-mode">Low Performance</label>
+                <input type="checkbox" id="performance-mode" name="performance-mode">
+            </div>
+        </div>
+        <button class="toggle-button">☰</button>
+    </div>
 
-	<!-- Sidebar -->
-	<div class="sidebar" id="sidebar">
-		<button class="close-button">✕ Close</button>
-		<div id="dropdown-container">
-			<!-- Dynamic dropdowns will be added here -->
-		</div>
-	</div>
-
-	<script type="module" src="scripts/render/scene.js"></script>
-	<script type="module" src="./scripts/menu/sidebar"></script>
-	<script type="module" src="./scripts/events/loaded"></script>
-	<script src="https://cdn.jsdelivr.net/npm/pako@2.0.4/dist/pako.min.js"></script>
+    <!-- Main Initialization Script -->
+    <script type="module" src="./scripts/main.js"></script>
 </body>
 
 </html>

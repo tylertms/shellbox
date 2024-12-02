@@ -1,3 +1,5 @@
+import { available } from "../utils/constants";
+
 function getMenuStates() {
   // Get all dropdown menus
   const dropdownGroups = document.querySelectorAll('.dropdown-group');
@@ -14,20 +16,22 @@ function getMenuStates() {
     const levelValue = levelDropdown ? levelDropdown.value : null;
     const setValue = setDropdown ? setDropdown.value : null;
 
-    // Push the state for this group
-    if (shellValue) {
-      states.push({
-        set: shellValue,
-        building: categoryName,
-        category: categoryName
-      });
-    } else {
-      states.push({
-        set: setValue,
-        building: levelValue,
-        category: categoryName
-      });
-    }
+    available.filter(category => category === categoryName).forEach(() => {
+      // Push the state for this group
+      if (shellValue) {
+        states.push({
+          set: shellValue,
+          building: categoryName,
+          category: categoryName
+        });
+      } else {
+        states.push({
+          set: setValue,
+          building: levelValue,
+          category: categoryName
+        });
+      }
+    });
   });
 
   return states;

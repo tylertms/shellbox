@@ -180,7 +180,7 @@ export const defaults = {
     'CHICKEN_UNIVERSE',
     'CHICKEN_UNIVERSE',
     'CHICKEN_UNIVERSE',
-    'HATCHERY_UNIVERSE',
+    'HATCHERY_ENLIGHTENMENT',
     'SILO_1_LARGE',
     'SILO_1_LARGE',
     'SILO_1_LARGE',
@@ -191,7 +191,7 @@ export const defaults = {
     'SILO_1_LARGE',
     'SILO_1_LARGE',
     'SILO_1_LARGE',
-    'DEPOT_7',
+    'DEPOT_1',
     'FUEL_TANK_4',
     'HOA_3',
     'MISSION_CONTROL_3',
@@ -221,6 +221,8 @@ export const defaults = {
   ]
 }
 
+export const available = defaults.max.map(building => categoryMap[building]);
+
 export const displayNames = {
   'HAB': 'Habs',
   'GROUND': 'Ground',
@@ -246,7 +248,7 @@ export const dependentBuildings = {
 }
 
 export const URLs = {
-  shells: 'https://gist.githubusercontent.com/tylertms/7592bcbdd1b6891bdf9b2d1a4216b55b/raw',
-  worker: 'https://shell.tylertms.workers.dev/?url=https://auxbrain.com/dlc/shells/',
+  config: 'https://gist.githubusercontent.com/tylertms/714615bbf3fa3ebb315d7fd554f2a699/raw',
+  worker: 'https://shell.tylertms.workers.dev/',
   r2: 'https://pub-09894c58859248c6ba3cd24f4045b4b5.r2.dev/',
 };
