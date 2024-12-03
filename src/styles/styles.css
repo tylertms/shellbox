@@ -96,7 +96,7 @@ h2#title {
 }
 
 select {
-    width: 210px;
+    width: fit-content;
     height: 35px;
     padding: 7px;
     padding-left: 10px;
