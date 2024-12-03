@@ -51,7 +51,7 @@ body {
     transition: left 0.2s ease-in-out;
 }
 
-h2#title {
+p#title {
     position: fixed;
     top: 0px;
     left: 22px;
@@ -96,12 +96,12 @@ h2#title {
 }
 
 select {
-    width: fit-content;
     height: 35px;
     padding: 7px;
     padding-left: 10px;
+    padding-right: 20px;
     padding-bottom: 4px;
-    padding-right: 40px;
+    margin-right: 10px;
     font-size: 16px;
     background-color: #333;
     color: white;
@@ -111,12 +111,23 @@ select {
     border-radius: 10px;
 }
 
+select:hover {
+    background-color: #222;
+}
+
 .apply {
     color: white;
     background-color: #333;
+    width: 60px;
     height: 35px;
     float: right;
     border-radius: 10px;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+.apply:hover {
+    background-color: #222;
 }
 
 hr#header-break {
@@ -152,7 +163,6 @@ hr#header-break {
 .content {
     padding: 10px;
     display: none;
-    overflow: hidden;
     background-color: rgba(34, 34, 34, 0.5);
     margin-bottom: 10px;
     width: calc(100% - 40px);

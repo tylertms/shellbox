@@ -8,6 +8,10 @@ const dropdown = document.getElementById('set-select')
 async function populateShellData() {
   try {
     const config = getConfig();
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.textContent = 'Default';
+    dropdown.appendChild(defaultOption);
     config.shellSets.filter(s => !s.elementSet).sort((a, b) => a.name.localeCompare(b.name)).forEach(set => {
       const option = document.createElement('option');
       option.value = set.identifier;
