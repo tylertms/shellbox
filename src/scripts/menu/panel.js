@@ -1,4 +1,5 @@
 import applyPerformanceMode from "../render/scene";
+import applySet from "../utils/applySet";
 
 export function setupPanelToggle() {
   const toggleButton = document.querySelector('.side-panel .toggle-button');
