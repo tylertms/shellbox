@@ -40,7 +40,7 @@ renderer.domElement.style.filter = 'brightness(1.4) saturate(1.4) contrast(1.4)'
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
-controls.dampingFactor = 0.1;
+controls.dampingFactor = 0.2;
 controls.zoomSpeed = 1;
 controls.maxDistance = 200;
 controls.minDistance = 10;
