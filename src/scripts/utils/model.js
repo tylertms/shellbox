@@ -121,7 +121,7 @@ const adjustPositions = (shell, model) => {
 
 const handleDependencies = (s) => {
   const building = s.primaryPiece?.assetType || s.building;
-  
+
   Object.keys(dependentBuildings).forEach((key) => {
     if (building.startsWith(key)) {
       const dependentModel = scene.children.find((child) => {
@@ -139,4 +139,15 @@ const handleDependencies = (s) => {
   });
 };
 
-export { getSize, applyProperties, adjustPositions, handleDependencies };
+const getRandomizedAltAsset = (_decorator) => {
+  let decorator = structuredClone(_decorator);
+  
+  if (decorator.altAssets?.length) {
+    decorator.altAssets.push(decorator.primaryPiece.dlc);
+    decorator.primaryPiece.dlc = decorator.altAssets[Math.floor(Math.random() * decorator.altAssets.length)]
+  }
+
+  return decorator;
+}
+
+export { getSize, applyProperties, adjustPositions, handleDependencies, getRandomizedAltAsset };

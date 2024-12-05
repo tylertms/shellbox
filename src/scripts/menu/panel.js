@@ -1,5 +1,5 @@
 import applyPerformanceMode from "../render/scene";
-import applySet from "../utils/applySet";
+import { applySet } from "../utils/apply";
 
 export function setupPanelToggle() {
   const toggleButton = document.querySelector('.side-panel .toggle-button');
@@ -39,12 +39,13 @@ export function setupCollapsible() {
 
 export function setupApplyButtons() {
   const buttons = document.getElementsByClassName("apply");
-  const selector = document.getElementById("set-select");
+  const setSelector = document.getElementById("set-select");
 
   for (let i = 0; i < buttons.length; i++) {
+    console.log("BUTTON " + i)
     buttons[i].addEventListener("click", async function() {
-      const selectedValue = selector.value;
-      console.log('Selected Value:', selectedValue);
+      const selectedValue = buttons[i].previousElementSibling.value
+
       await applySet(selectedValue)
     })
   }

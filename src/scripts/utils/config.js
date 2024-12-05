@@ -16,3 +16,22 @@ export function getConfig() {
   }
   return configCache;
 }
+
+
+
+export var shells;
+export function setShells(_shells) {
+  shells = _shells
+  console.log("SHELLS LENGTH: ", shells.length)
+}
+export function getShells() {
+  return shells;
+}
+
+export var decorator;
+export function setDecorator(_decorator) {
+  decorator = _decorator
+}
+export function getDecorator() {
+  return decorator;
+}

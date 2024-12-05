@@ -43,10 +43,11 @@ body {
     background-color: #333;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 3px 6px;
+    padding-bottom: 0px;
     cursor: pointer;
     z-index: 2;
-    font-size: 18px;
+    font-size: 36px;
     border-radius: 5px;
     transition: left 0.2s ease-in-out;
 }
@@ -54,10 +55,10 @@ body {
 p#title {
     position: fixed;
     top: 0px;
-    left: 22px;
+    left: 0px;
+    margin: 25px;
     color: white;
-    z-index: 10;
-    font-size: 28px;
+    font-size: 44px;
 }
 
 .panel-content.open~.toggle-button {
@@ -139,14 +140,14 @@ hr#header-break {
     background-color: #333;
     color: white;
     cursor: pointer;
-    padding: 10px;
+    padding: 12px;
     padding-bottom: 6px;
     margin-top: 10px;
     width: calc(100% - 20px);
     border: none;
     text-align: left;
     outline: none;
-    font-size: 18px;
+    font-size: 24px;
     border-radius: 10px;
 }
 
@@ -164,7 +165,6 @@ hr#header-break {
     padding: 10px;
     display: none;
     background-color: rgba(34, 34, 34, 0.5);
-    margin-bottom: 10px;
     width: calc(100% - 40px);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;

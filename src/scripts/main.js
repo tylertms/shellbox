@@ -1,10 +1,10 @@
 // scripts/main.js
 
-import { initConfig } from './utils/config.js';
+import { initConfig, setShells } from './utils/config.js';
 import populateShellData from './menu/populate.js';
-import renderShells from './render/render.js';
 import { setupPanelToggle, setupLowPerformance, setupCollapsible, setupApplyButtons } from './menu/panel.js'; // Import panel toggle
 import { defaults, fileMap, categoryMap } from './utils/constants.js';
+import loadShells from './render/load.js';
 
 // Function to initialize the application
 async function initializeApp() {
@@ -21,16 +21,15 @@ async function initializeApp() {
     await populateShellData();
 
     // Set menu states based on shell data
-    const shells = defaults.max.map(building => ({
-      set: 'Default',
+    setShells(defaults.max.map(building => ({
+      setIdentifier: 'default',
       building: building,
       name: fileMap[building],
       category: categoryMap[building]
-    }));
-
+    })));
 
     
-    await renderShells(shells);
+    await loadShells();
 
     console.log('Application Initialized Successfully.');
   } catch (error) {
