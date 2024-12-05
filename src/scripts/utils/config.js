@@ -22,7 +22,6 @@ export function getConfig() {
 export var shells;
 export function setShells(_shells) {
   shells = _shells
-  console.log("SHELLS LENGTH: ", shells.length)
 }
 export function getShells() {
   return shells;

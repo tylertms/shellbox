@@ -53,7 +53,6 @@ const getUri = async (shell) => {
 const processModel = async (shell) => {
   const uri = await getUri(shell);
   if (!uri) return null;
-  console.log("GOT URI")
   try {
     const model = await loadGltf(uri);
     URL.revokeObjectURL(uri); // Clean up the object URL after loading

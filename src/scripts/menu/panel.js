@@ -1,5 +1,5 @@
 import applyPerformanceMode from "../render/scene";
-import { applySet } from "../utils/apply";
+import { apply } from "../utils/apply";
 
 export function setupPanelToggle() {
   const toggleButton = document.querySelector('.side-panel .toggle-button');
@@ -42,11 +42,10 @@ export function setupApplyButtons() {
   const setSelector = document.getElementById("set-select");
 
   for (let i = 0; i < buttons.length; i++) {
-    console.log("BUTTON " + i)
     buttons[i].addEventListener("click", async function() {
       const selectedValue = buttons[i].previousElementSibling.value
 
-      await applySet(selectedValue)
+      await apply(selectedValue)
     })
   }
 }

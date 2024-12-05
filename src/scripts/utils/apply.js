@@ -2,7 +2,7 @@ import { getConfig, setDecorator, setShells } from "./config";
 import { defaults, categoryMap, fileMap } from "./constants";
 import loadShells from "../render/load";
 
-export async function applySet(set) {
+export async function apply(set) {
   const config = getConfig();
 
   if (set.startsWith("sd_")) {
