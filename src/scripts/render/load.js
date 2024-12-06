@@ -71,12 +71,12 @@ function clearShells() {
 // Main function to handle all shells
 export default async function loadShells() {
   let shells = getShells();
-  let decorator = getDecorator();
 
   clearShells();
 
   await Promise.all(
     shells.map(async (shell) => {
+      let decorator = shell.decorator || getDecorator();
       const mainModel = await processModel(shell);
       if (!mainModel) return;
 

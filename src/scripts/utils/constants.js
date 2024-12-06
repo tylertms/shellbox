@@ -174,6 +174,25 @@ export const categoryMap = {
   'TROPHY_CASE': 'TROPHY_CASE',
 }
 
+export const farmElement = {
+  'HAB': 1,
+  'SILO': 2,
+  'MAILBOX': 3,
+  'TROPHY_CASE': 4,
+  'GROUND': 5,
+  'HARDSCAPE': 6,
+  'HYPERLOOP': 7,
+  'DEPOT': 8,
+  'LAB': 9,
+  'HATCHERY': 10,
+  'HOA': 11,
+  'MISSION_CONTROL': 12,
+  'FUEL_TANK': 13,
+  'CHICKEN': 14,
+  'HAT': 15,
+  'UNKNOWN': 99
+}
+
 export const defaults = {
   max: [
     'CHICKEN_UNIVERSE',
@@ -278,4 +297,5 @@ export const URLs = {
   config: 'https://gist.githubusercontent.com/tylertms/714615bbf3fa3ebb315d7fd554f2a699/raw',
   worker: 'https://shell.tylertms.workers.dev/',
   r2: 'https://pub-09894c58859248c6ba3cd24f4045b4b5.r2.dev/',
+  ei_worker: 'https://ei_worker.tylertms.workers.dev/',
 };

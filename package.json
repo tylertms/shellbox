@@ -1,8 +1,10 @@
 {
   "type": "module",
   "dependencies": {
+    "google-protobuf": "^3.21.4",
     "pako": "^2.1.0",
-    "three": "^0.171.0"
+    "three": "^0.171.0",
+    "vite-plugin-commonjs": "^0.10.4"
   },
   "devDependencies": {
     "vite": "^6.0.2"

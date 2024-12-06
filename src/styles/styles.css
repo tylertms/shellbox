@@ -97,6 +97,7 @@ p#title {
 }
 
 select {
+    flex-grow: 1;
     height: 35px;
     padding: 7px;
     padding-left: 10px;
@@ -116,6 +117,7 @@ select:hover {
     background-color: #222;
 }
 
+.signin,
 .apply {
     color: white;
     background-color: #333;
@@ -137,6 +139,7 @@ hr#header-break {
 }
 
 .collapsible {
+    position: relative;
     background-color: #333;
     color: white;
     cursor: pointer;
@@ -182,7 +185,44 @@ hr#header-break {
     border-radius: 0;
 }
 
-.content#sets {
+
+.form-container {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+}
+
+.textbox {
+    flex-grow: 1;
+    border-radius: 10px;
+    height: 40px;
+    background-color: #333;
+    font-size: 18px;
+    line-height: 18px;
+    padding-top: 5px;
+    padding-left: 10px;
+    border: 1px solid #ccc;
+    color: white;
+    box-sizing: border-box;
+}
+
+.signin {
+    border-radius: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    height: 40px;
+    cursor: pointer;
+    border: 1px solid white;
+}
+
+.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.signin:hover {
+    background-color: #222;
 }

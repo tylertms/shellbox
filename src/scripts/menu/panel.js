@@ -1,5 +1,7 @@
+import { fetchBackup } from "../api/backup";
 import applyPerformanceMode from "../render/scene";
 import { apply } from "../utils/apply";
+import populateShellData from "./populate";
 
 export function setupPanelToggle() {
   const toggleButton = document.querySelector('.side-panel .toggle-button');
@@ -12,7 +14,6 @@ export function setupPanelToggle() {
 
 export function setupLowPerformance() {
   const lowPerformanceButton = document.querySelector('.side-panel .performance-mode-toggle');
-  console.log('Low Performance Button:', lowPerformanceButton)
   lowPerformanceButton.addEventListener('click', () => {
     const performanceModeCheckbox = document.querySelector('#performance-mode');
     const isChecked = performanceModeCheckbox.checked;
@@ -28,10 +29,10 @@ export function setupCollapsible() {
     coll[i].addEventListener("click", function() {
       this.classList.toggle("active");
       var content = this.nextElementSibling;
-      if (content.style.display === "block") {
+      if (content.style.display === "flex") {
         content.style.display = "none";
       } else {
-        content.style.display = "block";
+        content.style.display = "flex";
       }
     });
   }
@@ -39,13 +40,39 @@ export function setupCollapsible() {
 
 export function setupApplyButtons() {
   const buttons = document.getElementsByClassName("apply");
-  const setSelector = document.getElementById("set-select");
 
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", async function() {
       const selectedValue = buttons[i].previousElementSibling.value
-
-      await apply(selectedValue)
+      await apply(selectedValue, buttons[i].previousElementSibling?.id)
     })
   }
+}
+
+export function setupSigninButton() {
+  const button = document.getElementById("submit-eid");
+  const textbox = document.getElementById("eid-text");
+
+  const submitEID = async () => {
+    if (button.classList.contains("disabled")) return;
+    
+    button.classList.add("disabled");
+
+    let result = await fetchBackup(textbox.value)
+    alert(result.message)
+    if (result.success) {
+      textbox.value = '';
+      populateShellData();
+    }
+
+    button.classList.remove("disabled");
+  }
+
+  button.addEventListener('click', submitEID);
+  textbox.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      button.click();
+    }
+  });
 }
