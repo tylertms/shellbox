@@ -56,11 +56,9 @@ const processModel = async (shell) => {
   if (!uri) return null;
   try {
     var model = await loadGltf(uri);
-    console.log(shell)
     if (shell.hexBaseColor && shell.variation) {
       model = applyColor(model, shell.hexBaseColor, shell.variation.hexColor)
     }
-
 
     URL.revokeObjectURL(uri); 
     return model;
@@ -88,7 +86,6 @@ export default async function loadShells() {
 
       const loadTasks = [];
 
-      
       if (decorator && !shell.modifiedGeometry) {
         let decoratedShell = getConfig().shells.find(
           (d) =>
@@ -107,13 +104,12 @@ export default async function loadShells() {
           );
         }
       }
-
       
       if (Array.isArray(shell.pieces) && shell.pieces.length > 0) {
         shell.pieces.forEach((piece) => {
           piece.hexBaseColor = shell.hexBaseColor;
           piece.variation = shell.variation;
-          //if (piece.assetType !== "MAILBOX_FULL")
+          if (piece.assetType !== "MAILBOX_FULL")
             loadTasks.push(
               processModel(piece).then((pieceModel) => {
                 if (pieceModel) {
@@ -124,13 +120,10 @@ export default async function loadShells() {
         });
       }
 
-      
       await Promise.all(loadTasks);
 
-      
       scene.add(mainModel);
 
-      
       applyProperties(mainModel, shell);
       handleDependencies(shell);
     })
@@ -159,26 +152,21 @@ async function applyColor(model, baseHex, newHex) {
         const numPer = Math.round(colors.length / count);
         
         for (let i = 0; i < count; i++) {
-
           const r = colors[i * numPer + 0];
           const g = colors[i * numPer + 1];
           const b = colors[i * numPer + 2];
 
-          
           if (
             Math.abs(r - baseRGB[0]) < 1e-4 &&
             Math.abs(g - baseRGB[1]) < 1e-4 &&
             Math.abs(b - baseRGB[2]) < 1e-4
           ) {
-            
             colors[i * numPer] = newRGB[0];
             colors[i * numPer + 1] = newRGB[1];
             colors[i * numPer + 2] = newRGB[2];
           }
-
         }
 
-        
         geometry.attributes.color.needsUpdate = true;
       }
     }

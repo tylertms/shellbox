@@ -18,24 +18,32 @@
             <div class="form-container">
                 <input type="text" placeholder="EI0000000000000000" class="textbox" id="eid-text">
                 <button id="submit-eid" class="signin" type="button">Submit</button>
-            </div>            
+            </div>
 
             <button type="button" class="collapsible">Sets</button>
             <div id="set-content" class="content">
-                <select class="select" id="set-select"></select>
-                <button class="apply" type="button">Apply</button>
+                <div class="select-apply">
+                    <select class="select" id="set-select"></select>
+                    <button class="apply" type="button">Apply</button>
+                </div>
+                <div id="variations">
+                </div>
             </div>
 
             <button type="button" class="collapsible">Decorators</button>
             <div id="decorator-content" class="content">
-                <select class="select" id="decorator-select"></select>
-                <button class="apply" type="button">Apply</button>
+                <div class="select-apply">
+                    <select class="select" id="decorator-select"></select>
+                    <button class="apply" type="button">Apply</button>
+                </div>
             </div>
 
             <button type="button" class="collapsible">My Configs</button>
             <div id="config-content" class="content">
-                <select class="select" id="config-select"></select>
-                <button class="apply" type="button">Apply</button>
+                <div class="select-apply">
+                    <select class="select" id="config-select"></select>
+                    <button class="apply" type="button">Apply</button>
+                </div>
             </div>
 
             <button type="button" class="collapsible">Buildings</button>

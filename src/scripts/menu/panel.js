@@ -2,6 +2,7 @@ import { fetchBackup } from "../api/backup";
 import applyPerformanceMode from "../render/scene";
 import { apply } from "../utils/apply";
 import populateShellData from "./populate";
+import populateVariations from "./variations";
 
 export function setupPanelToggle() {
   const toggleButton = document.querySelector('.side-panel .toggle-button');
@@ -40,6 +41,7 @@ export function setupCollapsible() {
 
 export function setupApplyButtons() {
   const buttons = document.getElementsByClassName("apply");
+  const setSelect = document.getElementById("set-select")
 
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].addEventListener("click", async function() {
@@ -47,6 +49,10 @@ export function setupApplyButtons() {
       await apply(selectedValue, buttons[i].previousElementSibling?.id)
     })
   }
+
+  setSelect.addEventListener("change", event => {
+    populateVariations(event.target.value)
+  })
 }
 
 export function setupSigninButton() {

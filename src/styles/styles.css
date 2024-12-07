@@ -67,7 +67,7 @@ p#title {
 
 .toggle-button:hover {
     background-color: #222;
-    
+
 }
 
 .performance-mode-toggle {
@@ -96,7 +96,7 @@ p#title {
     cursor: pointer;
 }
 
-select {
+.select {
     flex-grow: 1;
     height: 35px;
     padding: 7px;
@@ -171,6 +171,15 @@ hr#header-break {
     width: calc(100% - 40px);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px
+}
+
+.content .select-apply {
+    flex-direction: row;
+    width: 100%;
+    display: flex;
 }
 
 .collapsible:after {
@@ -225,4 +234,31 @@ hr#header-break {
 
 .signin:hover {
     background-color: #222;
+}
+
+
+#variations {
+    display: none;
+    flex-wrap: wrap; /* Allows buttons to wrap if they can't fit */
+    gap: 10px; /* Adds space between buttons */
+    justify-content: left; /* Centers the buttons within the row */
+    width: 100%; /* Ensures the container spans the full width */
+    box-sizing: border-box; /* Prevents content overflow due to padding */
+}
+
+
+.variation-button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    border-radius: 50%; /* Circular buttons */
+    text-align: center;
+    flex-shrink: 1; /* Allows buttons to shrink if needed */
+    width: 15%;
+    aspect-ratio: 1;
+}
+
+.variation-button:hover {
+    opacity: 0.8;
 }

@@ -1,9 +1,9 @@
-import { getConfig, setDecorator, setShells } from "./config";
+import { getConfig, setDecorator, setShells, getShells } from "./config";
 import { defaults, categoryMap, fileMap, farmElement } from "./constants";
 import loadShells from "../render/load";
 import { getBackup } from "../api/backup";
 
-export async function apply(set, type) {
+export async function apply(set, type, variation) {
   const config = getConfig();
   const backup = getBackup();
 
@@ -13,11 +13,21 @@ export async function apply(set, type) {
       break;
 
     case 'set-select':
+    case 'variation-select':
+      var shellSet;
+      if (variation) {
+        shellSet = config.shellSets.find(s => s.identifier === set)
+      }
+
       const shells = defaults.max.map((building, index) => {
         let shell = structuredClone(config.shells.find(shell => shell.setIdentifier === set && building.startsWith(shell.primaryPiece.assetType)));
 
         if (shell) {
           shell.index = index - defaults.max.indexOf(building);
+          if (variation && shellSet) {
+            shell.variation = variation;
+            shell.hexBaseColor = shellSet.hexBaseColor;
+          }
           return shell;
         }
         else if (!set.startsWith("sd_"))
@@ -48,12 +58,11 @@ export async function apply(set, type) {
 
       setItems.forEach(item => {
         let category = Object.keys(farmElement).find(key => farmElement[key] === item.element)
-        console.log(category)
+
         if (category === 'GROUND' || category === 'HARDSCAPE') return;
         if (category === 'HYPERLOOP') category = 'HYPERLOOP_STOP'
 
         let building = defaults.max.find(building => categoryMap[building] === category)
-        console.log(building)
         if (!building) return;
 
         let shellItem = structuredClone(config.shells.find(shell => shell.setIdentifier === item.shellSetIdentifier && building.startsWith(shell.primaryPiece.assetType)));
