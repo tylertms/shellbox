@@ -1,4 +1,5 @@
 import { GLTFLoader } from "three/examples/jsm/Addons.js";
+import * as THREE from 'three';
 import { URLs, fileMap } from "../utils/constants";
 import { scene } from "./scene";
 import convertBuffer from "../utils/convert";
@@ -19,11 +20,11 @@ const loadGltf = (uri) => {
   });
 };
 
-// Function to generate a URI for a given shell or piece
+
 const getUri = async (shell) => {
   try {
     if (!shell.identifier && !shell.dlc) {
-      // Handle shells without an identifier
+      
       shell.name = shell.name || fileMap[shell.building];
       if (!shell.name) return null;
 
@@ -32,7 +33,7 @@ const getUri = async (shell) => {
       const buffer = await response.arrayBuffer();
       return URL.createObjectURL(new Blob([buffer]));
     } else {
-      // Handle shells with an identifier (possibly DLC)
+      
       let url = shell.dlc?.url || shell.primaryPiece?.dlc?.url
       if (!url) return null;
 
@@ -49,13 +50,19 @@ const getUri = async (shell) => {
   }
 };
 
-// Function to process and load a single shell or piece
+
 const processModel = async (shell) => {
   const uri = await getUri(shell);
   if (!uri) return null;
   try {
-    const model = await loadGltf(uri);
-    URL.revokeObjectURL(uri); // Clean up the object URL after loading
+    var model = await loadGltf(uri);
+    console.log(shell)
+    if (shell.hexBaseColor && shell.variation) {
+      model = applyColor(model, shell.hexBaseColor, shell.variation.hexColor)
+    }
+
+
+    URL.revokeObjectURL(uri); 
     return model;
   } catch (error) {
     console.error(`Failed to load model for shell "${shell.name}":`, error);
@@ -68,12 +75,11 @@ function clearShells() {
   scene.children = scene.children.filter(c => c.userData.permanent == true)
 }
 
-// Main function to handle all shells
+
 export default async function loadShells() {
-  let shells = getShells();
+  const shells = getShells();
 
   clearShells();
-
   await Promise.all(
     shells.map(async (shell) => {
       let decorator = shell.decorator || getDecorator();
@@ -82,7 +88,7 @@ export default async function loadShells() {
 
       const loadTasks = [];
 
-      // Handle decorator if applicable
+      
       if (decorator && !shell.modifiedGeometry) {
         let decoratedShell = getConfig().shells.find(
           (d) =>
@@ -102,28 +108,81 @@ export default async function loadShells() {
         }
       }
 
-      // Handle shell.pieces if they exist
+      
       if (Array.isArray(shell.pieces) && shell.pieces.length > 0) {
         shell.pieces.forEach((piece) => {
-          loadTasks.push(
-            processModel(piece).then((pieceModel) => {
-              if (pieceModel) {
-                mainModel.add(pieceModel);
-              }
-            })
-          );
+          piece.hexBaseColor = shell.hexBaseColor;
+          piece.variation = shell.variation;
+          //if (piece.assetType !== "MAILBOX_FULL")
+            loadTasks.push(
+              processModel(piece).then((pieceModel) => {
+                if (pieceModel) {
+                  mainModel.add(pieceModel);
+                }
+              })
+            );
         });
       }
 
-      // Await all decorator and pieces to load in parallel
+      
       await Promise.all(loadTasks);
 
-      // Add the fully assembled model to the scene
+      
       scene.add(mainModel);
 
-      // Apply additional properties and handle dependencies
+      
       applyProperties(mainModel, shell);
       handleDependencies(shell);
     })
   );
 };
+
+const parseHex = (hex) => {
+  const decimal = parseInt(hex, 16);
+  const r = decimal >> 16
+  const g = decimal >> 8
+  const b = decimal
+  return [r, g, b].map(n => (n & 0xFF) / 255)
+}
+
+async function applyColor(model, baseHex, newHex) {
+  const baseRGB = parseHex(baseHex)
+  const newRGB = parseHex(newHex)
+
+  model.traverse((child) => {
+    if (child.isMesh) {
+      const geometry = child.geometry;
+
+      if (geometry && geometry.attributes.color) {
+        const colors = geometry.attributes.color.array; 
+        const count = geometry.attributes.color.count;  
+        const numPer = Math.round(colors.length / count);
+        
+        for (let i = 0; i < count; i++) {
+
+          const r = colors[i * numPer + 0];
+          const g = colors[i * numPer + 1];
+          const b = colors[i * numPer + 2];
+
+          
+          if (
+            Math.abs(r - baseRGB[0]) < 1e-4 &&
+            Math.abs(g - baseRGB[1]) < 1e-4 &&
+            Math.abs(b - baseRGB[2]) < 1e-4
+          ) {
+            
+            colors[i * numPer] = newRGB[0];
+            colors[i * numPer + 1] = newRGB[1];
+            colors[i * numPer + 2] = newRGB[2];
+          }
+
+        }
+
+        
+        geometry.attributes.color.needsUpdate = true;
+      }
+    }
+  });
+
+  return model;
+}

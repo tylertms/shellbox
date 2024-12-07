@@ -42,6 +42,7 @@ async function populateShellData() {
     })
     
     configDropdown.innerHTML = ''
+    if (backup?.shellDb)
     backup.shellDb.savedConfigsList.forEach(config => {
       const option = document.createElement('option');
       option.value = config.id;

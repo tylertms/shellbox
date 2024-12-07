@@ -44,24 +44,16 @@ export async function apply(set, type) {
         shellItem.index = 0;
         configShells.push(shellItem);
       });
-      
-      let hyperloopTrack = structuredClone(setItems.find(item => item.element === 7))
-      hyperloopTrack.index = 1
-      setItems.push(hyperloopTrack)
+
 
       setItems.forEach(item => {
         let category = Object.keys(farmElement).find(key => farmElement[key] === item.element)
+        console.log(category)
         if (category === 'GROUND' || category === 'HARDSCAPE') return;
-
-        if (category === 'HYPERLOOP') {
-          if (item.index === 0) {
-            category = 'HYPERLOOP_STOP';
-          } else {
-            category = 'HYPERLOOP_TRACK'
-          }
-        }
+        if (category === 'HYPERLOOP') category = 'HYPERLOOP_STOP'
 
         let building = defaults.max.find(building => categoryMap[building] === category)
+        console.log(building)
         if (!building) return;
 
         let shellItem = structuredClone(config.shells.find(shell => shell.setIdentifier === item.shellSetIdentifier && building.startsWith(shell.primaryPiece.assetType)));
@@ -69,6 +61,14 @@ export async function apply(set, type) {
 
         if (item.decoratorIdentifier) {
           shellItem.decorator = config.decorators.find(d => d.identifier === item.decoratorIdentifier)
+        }
+
+        if (item.variationIdentifier) {
+          const set = config.shellSets.find(s => s.identifier === item.shellSetIdentifier);
+          if (set) {
+            shellItem.hexBaseColor = set.hexBaseColor
+            shellItem.variation = set.variations.find(v => v.identifier === item.variationIdentifier)
+          }
         }
         configShells.push(shellItem)
       })
