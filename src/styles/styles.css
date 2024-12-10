@@ -138,6 +138,13 @@ hr#header-break {
     width: 280px;
 }
 
+hr#header-break-padded {
+    float: left;
+    width: 280px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .collapsible {
     position: relative;
     background-color: #333;
@@ -239,11 +246,11 @@ hr#header-break {
 
 #variations {
     display: none;
-    flex-wrap: wrap; /* Allows buttons to wrap if they can't fit */
-    gap: 10px; /* Adds space between buttons */
-    justify-content: left; /* Centers the buttons within the row */
-    width: 100%; /* Ensures the container spans the full width */
-    box-sizing: border-box; /* Prevents content overflow due to padding */
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: left;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 
@@ -252,13 +259,56 @@ hr#header-break {
     font-size: 16px;
     cursor: pointer;
     border: 2px solid #ccc;
-    border-radius: 50%; /* Circular buttons */
+    border-radius: 50%;
     text-align: center;
-    flex-shrink: 1; /* Allows buttons to shrink if needed */
+    flex-shrink: 1;
     width: 15%;
     aspect-ratio: 1;
 }
 
 .variation-button:hover {
     opacity: 0.8;
+}
+
+.slider-container {
+    position: relative;
+    width: calc(100% - 30px);
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 24px;
+    margin-bottom: 0;
+    margin-left: 5px;
+    margin-top: 0px;
+}
+
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 30px;
+    background: rgba(34, 34, 34, 0.5);
+    border: 2px solid #333;
+    border-radius: 15px;
+    outline: none;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background:  white;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #333;
+    border-radius: 50%;
+    cursor: pointer;
 }

@@ -25,6 +25,9 @@ const renderer = new THREE.WebGLRenderer({
     logarithmicDepthBuffer: true
 });
 
+renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Use PCFSoftShadowMap for smoother edges
+
+
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.outputEncoding = THREE.LinearEncoding;
@@ -36,7 +39,7 @@ renderer.shadowMap.enabled = !performanceMode;
 document.body.appendChild(renderer.domElement);
 
 // Apply CSS saturate filter
-renderer.domElement.style.filter = 'brightness(1.4) saturate(1.4) contrast(1.4)';
+renderer.domElement.style.filter = 'saturate(1.4) contrast(1.4)';
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
@@ -46,18 +49,20 @@ controls.maxDistance = 200;
 controls.minDistance = 10;
 
 // Ambient light (constant)
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+// on a scale from 0 to 2, default 1
+const ambientLight = new THREE.AmbientLight(0xffffff, 1);
 ambientLight.userData = { permanent: true };
 scene.add(ambientLight);
 
 // Directional light with shadows
-const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+// on a scale from 0 to 6, default 2
+const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
 directionalLight.position.set(-12, 12, 7.5);
 directionalLight.castShadow = !performanceMode;
 
 if (!performanceMode) {
-    directionalLight.shadow.mapSize.width = 2048;
-    directionalLight.shadow.mapSize.height = 2048;
+    directionalLight.shadow.mapSize.width = 1024;
+    directionalLight.shadow.mapSize.height = 1024;
     directionalLight.shadow.camera.near = -50;
     directionalLight.shadow.camera.far = 100;
     directionalLight.shadow.camera.left = -50;
@@ -65,7 +70,7 @@ if (!performanceMode) {
     directionalLight.shadow.camera.top = 50;
     directionalLight.shadow.camera.bottom = -50;
     directionalLight.shadow.bias = -0.001;
-    directionalLight.shadow.radius = 1; // Soft shadow
+    directionalLight.shadow.radius = 0; // Soft shadow
 }
 
 directionalLight.userData = { permanent: true };
@@ -95,4 +100,4 @@ function animate() {
 
 animate();
 
-export { scene, camera, renderer };
+export { scene, camera, renderer, ambientLight, directionalLight };

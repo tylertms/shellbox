@@ -1,5 +1,6 @@
 import { fetchBackup } from "../api/backup";
 import applyPerformanceMode from "../render/scene";
+import { ambientLight, directionalLight } from "../render/scene";
 import { apply } from "../utils/apply";
 import populateShellData from "./populate";
 import populateVariations from "./variations";
@@ -81,4 +82,19 @@ export function setupSigninButton() {
       button.click();
     }
   });
+}
+
+export function setupSliders() {
+  const sliders = [...document.getElementsByClassName("slider")]
+  sliders.forEach(slider => {
+    slider.addEventListener('input', (event) => {
+      switch (slider.previousElementSibling.textContent) {
+        case "Ambient":
+          ambientLight.intensity = event.target.value
+          break;
+        case "Direct":
+          directionalLight.intensity = event.target.value
+      }
+    });
+  })
 }
