@@ -333,8 +333,8 @@ p {
     background-color: white;
     border-radius: 50%;
     position: absolute;
-    top: 50px;
-    left: 20px;
+    top: 52px;
+    left: 15px;
     cursor: pointer;
     user-select: none;
     touch-action: none;
