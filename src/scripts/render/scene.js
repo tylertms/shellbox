@@ -61,8 +61,8 @@ directionalLight.position.set(-12, 12, 7.5);
 directionalLight.castShadow = !performanceMode;
 
 if (!performanceMode) {
-    directionalLight.shadow.mapSize.width = 1024;
-    directionalLight.shadow.mapSize.height = 1024;
+    directionalLight.shadow.mapSize.width = 2048;
+    directionalLight.shadow.mapSize.height = 2048;
     directionalLight.shadow.camera.near = -50;
     directionalLight.shadow.camera.far = 100;
     directionalLight.shadow.camera.left = -50;
