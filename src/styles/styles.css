@@ -272,8 +272,7 @@ hr#header-break-padded {
 
 .slider-container {
     position: relative;
-    width: calc(100% - 30px);
-    margin-bottom: 10px;
+    margin: 0;
 }
 
 p {
@@ -285,6 +284,7 @@ p {
 
 
 .slider {
+    display: flex;
     -webkit-appearance: none;
     appearance: none;
     width: 100%;
@@ -293,6 +293,7 @@ p {
     border: 2px solid #333;
     border-radius: 15px;
     outline: none;
+    margin-bottom: 10px;
 }
 
 .slider::-webkit-slider-thumb {
@@ -300,7 +301,7 @@ p {
     appearance: none;
     width: 25px;
     height: 25px;
-    background:  white;
+    background: white;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -311,4 +312,36 @@ p {
     background: #333;
     border-radius: 50%;
     cursor: pointer;
+}
+
+.outer-circle {
+    width: 100px;
+    height: 100px;
+    border: 2px solid white;
+    border-radius: 50%;
+    position: relative;
+    background-color: rgba(34, 34, 34, 0.5);
+    margin-left: 20px;
+    display: flex;
+    top: 30px;
+}
+
+
+.inner-circle {
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    cursor: pointer;
+    user-select: none;
+    touch-action: none;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
 }

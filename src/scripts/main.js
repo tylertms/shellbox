@@ -5,7 +5,7 @@ import populateShellData from './menu/populate.js';
 import { setupPanelToggle, setupLowPerformance, setupCollapsible, setupApplyButtons, setupSigninButton, setupSliders } from './menu/panel.js'; // Import panel toggle
 import { defaults, fileMap, categoryMap } from './utils/constants.js';
 import loadShells from './render/load.js';
-import { fetchBackup } from './api/backup.js';
+import './menu/lighting.js'
 
 import * as THREE from 'three';
 // Function to initialize the application

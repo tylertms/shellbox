@@ -52,15 +52,22 @@
 
             <hr id="header-break-padded">
 
-            <div class="slider-container">
-                <p>Direct</p>
-                <input type="range" class="slider" min="0" max="6" value="2" step="0.01"/>
+            <div class="container">
+                <div class="sliders">
+                    <div class="slider-container">
+                        <p>Direct</p>
+                        <input type="range" class="slider" min="0" max="6" value="2" step="0.01" />
+                    </div>
+                    <div class="slider-container">
+                        <p>Ambient</p>
+                        <input type="range" class="slider" min="0" max="2" value="1" step="0.01" />
+                    </div>
+                </div>
+                <div class="outer-circle">
+                    <div class="inner-circle" id="draggable"></div>
+                </div>
             </div>
-            
-            <div class="slider-container">
-                <p>Ambient</p>
-                <input type="range" class="slider" min="0" max="2" value="1" step="0.01"/>
-            </div>
+
 
 
             <div class="performance-mode-toggle">
